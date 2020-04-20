@@ -1,0 +1,7 @@
+It is considered good practice to add examples in here to demonstrate the
+functionality of your OOT module. Python scripts, GRC flow graphs or other
+code can go here.
+
+Build the hier-blocks from here.
+
+There are embedded pythonblocks that also gets built.

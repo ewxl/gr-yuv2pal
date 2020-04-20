@@ -1,0 +1,22 @@
+id: line720_1024interleaved
+label: 720 to 1024 interleaved
+category: '[Video]'
+
+parameters: []
+
+inputs:
+-   label: in
+    dtype: byte
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: byte
+    vlen: 1
+
+templates:
+    imports: 'import yuv2pal'
+    make: yuv2pal.line720_1024interleaved()
+    callbacks: []
+
+file_format: 1

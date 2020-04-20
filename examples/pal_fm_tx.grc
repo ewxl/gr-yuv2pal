@@ -1,0 +1,493 @@
+options:
+  parameters:
+    author: elof
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ffmpeg -v 0 -i quickie.mp4 -vf scale=720:576 -c:v rawvideo -pix_fmt yuv420p
+      -f rawvideo pipe:1 | python pal_fm_tx.py
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: pal_fm_tx
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Not titled yet
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: fc
+  id: variable_qtgui_entry
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Fc
+    type: real
+    value: vc_fc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1753, 668]
+    rotation: 0
+    state: enabled
+- name: if_gain
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: IF Gain
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: int
+    start: '0'
+    step: '1'
+    stop: '47'
+    value: vc_if
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1802, 99]
+    rotation: 0
+    state: true
+- name: rf_gain
+  id: variable_qtgui_check_box
+  parameters:
+    comment: ''
+    'false': '0'
+    gui_hint: ''
+    label: RF Gain
+    'true': '1'
+    type: int
+    value: vc_rf
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1959, 99]
+    rotation: 0
+    state: true
+- name: sens
+  id: variable_qtgui_entry
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Sensitivity
+    type: real
+    value: vc_sens
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1600, 252.0]
+    rotation: 0
+    state: enabled
+- name: vc_fc
+  id: variable_config
+  parameters:
+    comment: ''
+    config_file: settings_pal
+    option: '"fc"'
+    section: '"main"'
+    type: real
+    value: 5800e6
+    writeback: fc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1582, 666]
+    rotation: 0
+    state: enabled
+- name: vc_if
+  id: variable_config
+  parameters:
+    comment: ''
+    config_file: settings_pal
+    option: '"if"'
+    section: '"main"'
+    type: int
+    value: '0'
+    writeback: if_gain
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1814, 231]
+    rotation: 0
+    state: enabled
+- name: vc_rf
+  id: variable_config
+  parameters:
+    comment: ''
+    config_file: settings_pal
+    option: '"rf"'
+    section: '"main"'
+    type: int
+    value: '1'
+    writeback: rf_gain
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1969, 218]
+    rotation: 0
+    state: enabled
+- name: vc_sens
+  id: variable_config
+  parameters:
+    comment: ''
+    config_file: settings_pal
+    option: '"fmgain"'
+    section: '"main"'
+    type: real
+    value: '1'
+    writeback: sens
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1308, 453]
+    rotation: 0
+    state: enabled
+- name: analog_frequency_modulator_fc_0
+  id: analog_frequency_modulator_fc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    sensitivity: sens
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1326, 388]
+    rotation: 0
+    state: enabled
+- name: blocks_char_to_float_0
+  id: blocks_char_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: 2**8
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [514, 258]
+    rotation: 0
+    state: true
+- name: blocks_char_to_float_1
+  id: blocks_char_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: 2**8
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [524, 341]
+    rotation: 0
+    state: true
+- name: blocks_file_descriptor_source_0
+  id: blocks_file_descriptor_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    fd: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    repeat: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 149]
+    rotation: 0
+    state: true
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: 2**-8
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [758, 201]
+    rotation: 0
+    state: true
+- name: blocks_uchar_to_float_0
+  id: blocks_uchar_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [497, 196]
+    rotation: 0
+    state: true
+- name: qtgui_time_sink_x_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'False'
+    entags: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: '""'
+    nconnections: '1'
+    size: 1280*2
+    srate: 20e6
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: float
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: '0.8'
+    ymin: -.4
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1383, 199]
+    rotation: 0
+    state: enabled
+- name: rational_resampler_xxx_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: '4'
+    fbw: '0'
+    interp: '5'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: ''
+    type: fff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1177, 229]
+    rotation: 0
+    state: enabled
+- name: soapy_sink_0
+  id: soapy_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    amp_gain0: rf_gain
+    ant0: '"TX/RX"'
+    ant1: TX
+    args: ''
+    balance0: '0'
+    balance1: '0'
+    bw0: '0'
+    bw1: '0'
+    center_freq0: fc
+    center_freq1: 100.0e6
+    clock_rate: '0'
+    clock_source: ''
+    comment: ''
+    correction0: '0'
+    correction1: '0'
+    dc_offset0: '0'
+    dc_offset1: '0'
+    dc_offset_auto_mode0: 'False'
+    dc_offset_auto_mode1: 'False'
+    dev: driver=uhd
+    devname: hackrf
+    gain_auto_mode0: 'False'
+    gain_auto_mode1: 'False'
+    iamp_gain0: '0'
+    iamp_gain1: '0'
+    length_tag_name: ''
+    manual_gain0: 'True'
+    manual_gain1: 'True'
+    nchan: '1'
+    nco_freq0: '0'
+    nco_freq1: '0'
+    overall_gain0: '10'
+    overall_gain1: '0'
+    pad_gain0: '0'
+    pad_gain1: '0'
+    pga_gain0: '24'
+    pga_gain1: '0'
+    samp_rate: 20e6
+    txvga1_gain: '-35'
+    txvga2_gain: '0'
+    type: fc32
+    vga_gain0: if_gain
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1551, 499]
+    rotation: 0
+    state: true
+- name: yuv576i2pal_0
+  id: yuv576i2pal
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1000, 264.0]
+    rotation: 0
+    state: true
+- name: yuv_to_576i_0
+  id: yuv_to_576i
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    height: '576'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    width: '720'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 232.0]
+    rotation: 0
+    state: true
+
+connections:
+- [analog_frequency_modulator_fc_0, '0', soapy_sink_0, '0']
+- [blocks_char_to_float_0, '0', yuv576i2pal_0, '1']
+- [blocks_char_to_float_1, '0', yuv576i2pal_0, '2']
+- [blocks_file_descriptor_source_0, '0', yuv_to_576i_0, '0']
+- [blocks_multiply_const_vxx_0, '0', yuv576i2pal_0, '0']
+- [blocks_uchar_to_float_0, '0', blocks_multiply_const_vxx_0, '0']
+- [rational_resampler_xxx_0, '0', analog_frequency_modulator_fc_0, '0']
+- [rational_resampler_xxx_0, '0', qtgui_time_sink_x_0, '0']
+- [yuv576i2pal_0, '0', rational_resampler_xxx_0, '0']
+- [yuv_to_576i_0, '0', blocks_uchar_to_float_0, '0']
+- [yuv_to_576i_0, '1', blocks_char_to_float_0, '0']
+- [yuv_to_576i_0, '2', blocks_char_to_float_1, '0']
+
+metadata:
+  file_format: 1

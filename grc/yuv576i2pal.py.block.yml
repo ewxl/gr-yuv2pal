@@ -1,0 +1,28 @@
+id: yuv576i2pal
+label: YUV 576i to PAL
+category: '[Video]'
+
+parameters: []
+
+inputs:
+-   label: in_y
+    dtype: float
+    vlen: 1
+-   label: in_u
+    dtype: float
+    vlen: 1
+-   label: in_v
+    dtype: float
+    vlen: 1
+
+outputs:
+-   label: pal
+    dtype: float
+    vlen: 1
+
+templates:
+    imports: 'import yuv2pal'
+    make: yuv2pal.yuv576i2pal()
+    callbacks: []
+
+file_format: 1

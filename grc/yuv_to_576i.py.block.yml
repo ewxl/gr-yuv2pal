@@ -1,0 +1,40 @@
+id: yuv_to_576i
+label: YUV420 to 576i (625)
+category: '[Video]'
+
+parameters:
+-   id: height
+    label: Height
+    dtype: raw
+    default: '576'
+    hide: none
+-   id: width
+    label: Width
+    dtype: int
+    default: '720'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: byte
+    vlen: 1
+
+outputs:
+-   label: y
+    dtype: byte
+    vlen: 1
+-   label: u
+    dtype: byte
+    vlen: 1
+-   label: v
+    dtype: byte
+    vlen: 1
+
+templates:
+    imports: 'import yuv2pal'
+    make: "yuv2pal.yuv_to_576i(\n    height=${ height },\n    width=${ width },\n)"
+    callbacks:
+    - set_height(${ height })
+    - set_width(${ width })
+
+file_format: 1
