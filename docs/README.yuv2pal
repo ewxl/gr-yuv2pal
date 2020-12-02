@@ -1,3 +1,8 @@
+Gnuradio workflows to convert a YUV-stream to a colour-coded PAL-signal, 
+ready to be transmitted over the air.
+
+Use with ffmpeg to livestream from a encoded local file, examples included.
+
 This is the yuv2pal-write-a-block package meant as a guide to building
 out-of-tree packages. To use the yuv2pal blocks, the Python namespaces
 is in 'yuv2pal', which is imported as:
