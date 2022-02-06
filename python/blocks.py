@@ -6,6 +6,7 @@ import os
 from gnuradio import gr
 from gnuradio import blocks
 from gnuradio.filter import firdes
+from gnuradio.fft import window
 
 from codecs import decode
 from gnuradio import analog
@@ -114,7 +115,7 @@ class yuv576i2pal(gr.hier_block2):
                 16e6,
                 5.5e6,
                 16e6*0.03,
-                firdes.WIN_HAMMING,
+                window.WIN_HAMMING,
                 6.76))
         self.blocks_vector_source_x_0 = blocks.vector_source_f(np.unpackbits(np.fromstring(decode(decode(sync,"base64"),"zip"),np.uint8)), True, 1, [])
         self.blocks_stream_mux_1 = blocks.stream_mux(gr.sizeof_float*1, [12*16,(64-12)*16,12*16,(64-12)*16])
